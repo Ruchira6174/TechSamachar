@@ -20,11 +20,14 @@ if config.config_file_name is not None:
 # add your model's MetaData object here
 # for 'autogenerate' support
 from tech_samachar.db.base import Base
-# ensure models are imported
+
+# Import every model so Alembic discovers all database tables.
 import tech_samachar.db.models.source
 import tech_samachar.db.models.article
-target_metadata = Base.metadata
+import tech_samachar.db.models.preference
+import tech_samachar.db.models.briefing
 
+target_metadata = Base.metadata
 def get_url():
     return settings.DATABASE_URL
 
