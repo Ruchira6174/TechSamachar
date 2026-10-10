@@ -1,4 +1,5 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import computed_field
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "Tech Samachar"
@@ -8,8 +9,12 @@ class Settings(BaseSettings):
     POSTGRES_PASSWORD: str = "postgres"
     POSTGRES_DB: str = "tech_samachar"
     POSTGRES_HOST: str = "localhost"
-    POSTGRES_PORT: str = "5432"
-    DATABASE_URL: str = "postgresql://postgres:postgres@localhost:5432/tech_samachar"
+    POSTGRES_PORT: str = "5433"
+
+    @computed_field
+    @property
+    def DATABASE_URL(self) -> str:
+        return f"postgresql+psycopg2://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
     
     # AI Provider settings (placeholder for Phase 4)
     AI_PROVIDER: str = "none"
