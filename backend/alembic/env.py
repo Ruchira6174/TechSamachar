@@ -26,6 +26,7 @@ import tech_samachar.db.models.source
 import tech_samachar.db.models.article
 import tech_samachar.db.models.preference
 import tech_samachar.db.models.briefing
+import tech_samachar.db.models.processing_job
 
 target_metadata = Base.metadata
 def get_url():
